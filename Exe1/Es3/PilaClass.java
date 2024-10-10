@@ -7,7 +7,6 @@ public class PilaClass extends Vector implements PilaInterface {
 	@Override
 	public <T> void push(T elem) {
 		super.addElement(elem);
-
 	}
 
 	@Override

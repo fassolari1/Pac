@@ -4,17 +4,6 @@ import java.util.ArrayList;
 
 import Es1.Student;
 
-/**
- * This is an exercise of data structures for the research of duplicates with
- * different data structures using generics. In this exercise we use also the
- * Student class created in the package Es1
- * 
- * @author Marco Vinciguerra
- * @author Gabriele Marchesi
- * @year 2022-2023
- *
- */
-
 public class mainduplicated {
 
 	public static void main(String[] args) {
@@ -46,9 +35,9 @@ public class mainduplicated {
 
 		System.out.println("Second test: " + result2);
 
-		Student a = new Student("Marco", "Vinciguerra", "unibg", "01-06-2000", 1064889, false);
-		Student b = new Student("Alessandro", "Belotti", "unibg", "01-06-2000", 1066721, false);
-		Student c = new Student("Matteo", "Vedovati", "unibg", "01-06-2000", 1066721, false);
+		Student a = new Student("Marco", "Vinciguerra", "unibg", "01-06-2000", 1064889);
+		Student b = new Student("Alessandro", "Belotti", "unibg", "01-06-2000", 1066721);
+		Student c = new Student("Matteo", "Vedovati", "unibg", "01-06-2000", 1066721);
 
 		ArrayList<Student> al3 = new ArrayList<Student>();
 		al3.add(a);

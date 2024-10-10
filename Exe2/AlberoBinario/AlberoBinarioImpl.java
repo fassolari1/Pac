@@ -10,28 +10,18 @@ public class AlberoBinarioImpl implements AlberoBinario{
 	protected NodoBinario radice;
 
 	//Metodo costruttore di default
-	public AlberoBinarioImpl(){
-		radice = null;
-	}
+	public AlberoBinarioImpl(){radice = null;}
 	
 	//Metodi costruttori: due varianti (uno con l'info ed uno direttamente con il nodo)
-	public AlberoBinarioImpl(Object e){
-		radice = new NodoBinario(e);
-	}
+	public AlberoBinarioImpl(Object e){radice = new NodoBinario(e);}
 
-	public AlberoBinarioImpl(NodoBinario rad){
-		radice = rad;
-	}
+	public AlberoBinarioImpl(NodoBinario rad){radice = rad;}
 	
 	//Metodi accessori:
-	public NodoBinario radice(){
-		return radice;	
-	}
+	public NodoBinario radice(){return radice;}
 	
 	
-	public int numNodi(){
-	 return numNodi(radice);	
-	}
+	public int numNodi(){return numNodi(radice);}
 		
 	/**
 	 * Restituisce il numero di nodi dell'albero radicato in un nodo
@@ -105,7 +95,7 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		int nsx, ndx;
 		nsx = 0;
 		ndx = 0;
-		if (u.sinistro == null && u.destro == null) return 0;
+		if (u.sinistro == null && u.destro == null) return 0; // Nodo Foglia (0 perchè non devo contarlo)
 		if (u.sinistro!=null)
 			nsx = numNodiInterni(u.sinistro);
 		if (u.destro!=null)
@@ -117,14 +107,13 @@ public class AlberoBinarioImpl implements AlberoBinario{
 	public int numFoglie() {
 		if (radice==null) return 0;
 		return numFoglie(radice);
-		
-	};
+	}
 	
 	//restituisce il numero di foglie di un nodo
 	private int numFoglie(NodoBinario u) {
-		int nsx = 0, ndx=0;
+		int nsx = 0, ndx=0; //restituirò 0 a meno che non siano nodi foglia
 		//verifico che u passato sia una foglia
-		if (u.sinistro == null && u.destro == null) return 1;
+		if (u.sinistro == null && u.destro == null) return 1; // Nodo Foglia (1 conto quelle)
 		if (u.sinistro!=null) nsx = numFoglie(u.sinistro);
 		if (u.destro!=null) ndx = numFoglie(u.destro);
 		return nsx+ndx;
@@ -137,12 +126,12 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		dx = false;
 		if ((radice==null && v!=null)||(radice!=null && v== null)) return false; //uno dei due alberi è vuoto
 		if (radice==null && v==null) return true;  //entrambi gli alberi sono vuoti
+		
 		if ((info(radice) != info(v)) || (radice.sinistro != null)!=(v.sinistro != null) 
 				|| (radice.destro != null)!=(v.destro != null)) return false; //sono diversi
 		else if ( info(radice) == info(v) &&
 				(radice.sinistro== null && v.sinistro ==null) ||
-				(radice.destro == null && v.destro== null)
-				)
+				(radice.destro == null && v.destro== null) )
 			{return true;} //sono due foglie uguali
 		else if (radice.sinistro!=null)
 			{sx = equalsNodo (radice.sinistro, v.sinistro);}
@@ -170,10 +159,16 @@ public class AlberoBinarioImpl implements AlberoBinario{
 				(u.destro == null && v.destro== null)
 				)
 			{return true;} //sono due foglie uguali
-		else if (u.sinistro!=null)
+		/*else if (u.sinistro!=null)
 			{sx = equalsNodo (u.sinistro, v.sinistro);}
 		else if (u.destro !=null) 
-			{dx= equalsNodo (u.destro, v.destro);}
+			{dx= equalsNodo (u.destro, v.destro);}*/
+		else {
+			if (u.sinistro!=null)
+				sx = equalsNodo (u.sinistro, v.sinistro);
+			if (u.destro !=null)
+				dx= equalsNodo (u.destro, v.destro);
+		}
 		return sx && dx;
 	}
 			
@@ -186,21 +181,21 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		if (radice==null) return;
 		if (radice.sinistro != null) {
 			if (radice.sinistro.sinistro!= null ||
-				radice.sinistro.destro!= null) // radice.sinistro non Ã¨ una foglia
+				radice.sinistro.destro!= null) // radice.sinistro non è una foglia
 					{eliminaFoglieUguali(radice.sinistro);}
-			else // Ã¨ una foglia
+			else // è una foglia
 				{sx = info(radice.sinistro);
 				nfoglie ++;}
 		}
 		if (radice.destro != null) {
 			if (radice.destro.sinistro!= null ||
-				radice.destro.destro!= null) // radice.destro non Ã¨ una foglia
+				radice.destro.destro!= null) // radice.destro non è una foglia
 					{eliminaFoglieUguali(radice.destro);}
-			else // Ã¨ una foglia
+			else // è una foglia
 				{dx = info(radice.destro);
 				nfoglie ++;}
 		}				
-		if (nfoglie ==2 && sx==dx)
+		if (nfoglie == 2 && sx==dx)
 			{radice.sinistro = null;
 			 radice.destro = null;
 		}
@@ -366,7 +361,7 @@ public class AlberoBinarioImpl implements AlberoBinario{
 			AlberoBinario newalbero = potaSinistro(pad);
 			return newalbero;						
 		}
-		else{ ////"rimosso" figlio destro 
+		else{ //"rimosso" figlio destro 
 			AlberoBinario newalbero = potaDestro(pad);
 			return newalbero;									
 		}
