@@ -49,8 +49,6 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 			else y.destro = z;									
 		}			
 	}
-
-	
 	
 	
 	/**
@@ -116,9 +114,6 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 		}	
 	
 	
-	
-	
-	
 	/**
 	 * Ricerca del nodo con valore max della chiave
 	 * nel sottoalbero radicato in u 
@@ -128,16 +123,14 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 		NodoBinario v = u;		
 		while(v.destro != null) 
 			v=v.destro;//mi sposto piu' a destra possibile
-		return v;	
-		
+		return v;
 	}
 	
 	public NodoBinario min(NodoBinario u){
 		NodoBinario v = u;		
 		while(v.sinistro != null) 
 			v=v.sinistro;//mi sposto piu' a sx possibile
-		return v;	
-		
+		return v;
 	}
 	
 	public NodoBinario pred(NodoBinario u) {
@@ -173,7 +166,6 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 	 */
 	public AlberoBR intersez(AlberoBR u, AlberoBR v) {
 		AlberoBinario a = u;
-		
 		return null;
 		
 	}
