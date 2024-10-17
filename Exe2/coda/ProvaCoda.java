@@ -8,6 +8,7 @@ public class ProvaCoda {
     
     //Creo una coda inizialmente vuota
 	 Coda coda = new CodaCollegata(); //Nota l'uso del polimorfismo con l'interfaccia Coda
+	 int lista[]= new int[10];
 	
 	 //Provo ad eliminare un elemento da una coda vuota (dovrei ottenere un'eccezione)
 	  try {
@@ -18,8 +19,8 @@ public class ProvaCoda {
        }
 	 
 	 //Inserisco gli interi passati da riga di comando
-	 for (int i=0; i< args.length; i++)
-        coda.enqueue(Integer.valueOf(args[i]));
+	 for (int i=0; i< lista.length; i++)
+        coda.enqueue(Integer.valueOf(lista[i]));
 	 
   
     //Stampo il primo elemento (senza eliminarlo)
