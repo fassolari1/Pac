@@ -254,8 +254,29 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		return sx || dx;
 	}
 	
-	LinkedList<Object> listaNodiCardine; //variabile globale
+	LinkedList<NodoBinario> listaNodiCardine; //variabile globale
 	
+	/** Versione più elegante*/
+	@Override
+	public List nodiCardine() {
+		listaNodiCardine = new LinkedList<NodoBinario>();
+		nodiCardine(this.radice,0);
+		return listaNodiCardine;
+	}
+	
+	public int nodiCardine(NodoBinario u, int p) {
+		if (u == null) {
+			return -1;
+		} else {
+			int altezzaSX = nodiCardine(u.sinistro, p+1);
+			int altezzaDX = nodiCardine(u.destro, p+1);
+			int altezza = Math.max(altezzaSX, altezzaDX)+1;
+			if (p == altezza) listaNodiCardine.add(u);
+			return altezza;
+		}
+	}
+	
+	/* VERSIONE VECCHIA
 	public List nodiCardine() { //rende la lista dei nodi con livello = altezza
     	listaNodiCardine = new LinkedList<Object> ();  
 		if (radice == null) return listaNodiCardine;
@@ -276,6 +297,7 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		if (u.destro!=null) nodiCardine (u.destro);
 		return;
 	}
+	*/
 	
 	public Object info(NodoBinario v){
 		return v.elem;
@@ -397,7 +419,6 @@ public class AlberoBinarioImpl implements AlberoBinario{
 		return output;
 	}
 
-	
 }
 
 
