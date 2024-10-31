@@ -6,12 +6,15 @@ import java.util.Hashtable;
 public class FinancialHistory implements FinantialHistoryInterface{
 	
 	private float cashOnHand;
-	private String s;
 	private Hashtable<String, Float> incomes, expenditures;
 	
 	public FinancialHistory(float ammount) {
 		if(ammount < 0) throw new NegAmmountException("Ammontare negativo!");
-		else cashOnHand = ammount;
+		else {
+			cashOnHand = ammount;
+			incomes = new Hashtable<String, Float>();
+			expenditures = new Hashtable<String, Float>();
+		}
 	}
 
 	@Override
@@ -53,25 +56,43 @@ public class FinancialHistory implements FinantialHistoryInterface{
 		if(cashOnHand < 0) throw new NegCashException("Saldo Negativo!");
 	}
 
+	/** approccio con StringBuilder*/
 	@Override
 	public String printIncomes() {
-		s = "Incomes: ";
+		
+		StringBuilder s = new StringBuilder();
+		s.append("Incomes: ");
+		
 		incomes.forEach((k,v) -> {
-			s += "\n" + k + "\t" + v.toString();
+			s.append("\n" + k + "\t" + v.toString());
 		});
-		return s;
+		return s.toString();
+	}
+	
+	/** approccio con List<> di chiavi e ciclo While*/
+	@Override
+	public String printIncomes2() {
+		
+		StringBuilder s = new StringBuilder();
+		Enumeration <String> lista_keys = incomes.keys();
+		
+		while(lista_keys.hasMoreElements()) {
+			String key = lista_keys.nextElement();
+			s.append("\n" + key + "\t" + incomes.get(key));
+		}
+		return s.toString();
 	}
 
+	/** approccio con StringBuilder*/
 	@Override
 	public String printExpenditures() {
-		s = "Expenditures: ";
+		
+		StringBuilder s = new StringBuilder();
+		s.append("Expenditure: ");
+		
 		expenditures.forEach((k,v) -> {
-			s += "\n" + k + "\t" + v.toString();
+			s.append("\n" + k + "\t" + v.toString());
 		});
-		return s;
-	}
-	
-	
-	
-	
+		return s.toString();
+	}	
 }

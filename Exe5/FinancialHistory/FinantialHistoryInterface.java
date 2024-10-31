@@ -10,5 +10,6 @@ public interface FinantialHistoryInterface {
 	public void controllaSaldo() throws NegCashException;
 	public String printIncomes();
 	public String printExpenditures();
+	public String printIncomes2();
 
 }
