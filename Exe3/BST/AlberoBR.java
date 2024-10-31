@@ -139,8 +139,10 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 			r = max(u.sinistro);
 			return r;
 		}
-		/* se provengo dal sinistro il padre sarà sempre più grande. Quindi se padre esiste salgo.
-		Io voglio il numero appena prima quindi prendo il padre che ha come figlio destro l'albero che contiene u. */
+		/* se provengo dal sinistro il padre sarà sempre più grande.
+		 * Quindi se padre esiste salgo.
+		 * Io voglio il numero appena prima quindi prendo il padre che
+		 * ha come figlio destro l'albero che contiene u. */
 		while(u.padre != null && u.padre.sinistro.equals(u)) {
 			r = u.padre;
 		}
