@@ -1,0 +1,22 @@
+Spiegazione dell'algoritmo Amici_di_Amici.java
+Per ogni vertice (persona) del grafo:
+	- Ottiene i vicini a distanza 1 (amici) e li salva in un set friends.
+	- Ottiene i vicini a distanza 2 (amici di amici) esaminando i vicini di ogni amico.
+	- Conta il numero totale di amici e amici di amici per ciascun vertice.
+
+Tiene traccia del vertice (persona) con il numero massimo di amici e amici di amici.
+
+Restituisce la persona con il massimo valore.
+
+
+
+Costo Computazionale
+V: Vertex;	E: total edges in Graph;
+e: average edges for Vertex = E/V
+	Caso peggiore (grafo pienamente connesso): E=V*(V-1)
+	Caso migliore (grafo senza connessioni) E=0
+	Caso medio E=V^2/2
+V*(e+e*e) = E + E^2/V --> O(E^2/V)
+	caso peggiore: V^2 + V^3 --> O(V^3)
+	caso medio: O(V^3/2)
+	caso migliore: O(V*1)
