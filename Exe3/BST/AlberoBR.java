@@ -59,7 +59,7 @@ public class AlberoBR extends AlberoBinarioImpl implements Dizionario{
 	 * @param k chiave dell'elemento da ricercare
 	 * @return elemento (l'intero record) di chiave k, null se assente o l'albero è vuoto
 	 */	
-	public Object search (Comparable k){
+	public Object search(Comparable k){
 		NodoBinario nodo = searchNodo(k,radice);
 		if(nodo == null) return null;
 		else return nodo.elem; //o in alternativa return data(nodo);
