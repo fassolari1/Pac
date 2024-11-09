@@ -3,7 +3,6 @@ package TreeMap;
 import java.util.Set;
 import java.util.TreeMap;
 
-
 public class AlberoRossoNero implements StringCollection {
 
 	private TreeMap<String, String> albero;
@@ -32,5 +31,4 @@ public class AlberoRossoNero implements StringCollection {
 		Set<String> keys = albero.keySet();
 		return keys.toString();
 	}
-
 }

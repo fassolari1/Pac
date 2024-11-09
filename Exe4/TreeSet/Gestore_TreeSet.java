@@ -1,8 +1,8 @@
 package TreeSet;
 
 public interface Gestore_TreeSet {
-	public void insertString(Object s);
-	public void deleteString(Object s);
-	public boolean checkString(Object s);
-	public Object concat();
+	public void insertString(String s);
+	public void deleteString(String s);
+	public boolean checkString(String s);
+	public String concatString();
 }

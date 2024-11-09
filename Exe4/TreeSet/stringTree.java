@@ -37,26 +37,4 @@ public class StringTree implements Gestore_TreeSet{
 	public void print(){
 		System.out.println(t.toString());
 	}
-	@Override
-	public void insertString(Object s) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void deleteString(Object s) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public boolean checkString(Object s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public Object concat() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }
