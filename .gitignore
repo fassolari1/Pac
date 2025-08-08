@@ -1,0 +1,39 @@
+# Ignora i file .DS_Store di macOS
+.DS_Store
+
+# File compilati Java
+*.class
+*.jar
+*.war
+*.ear
+
+# File di log
+*.log
+
+# File temporanei
+*.tmp
+*.temp
+*~
+
+# Directory di build
+bin/
+build/
+target/
+out/
+
+# File IDE
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# File di configurazione locale
+.settings/
+.classpath
+.project
+
+# File di backup
+*.bak
+*.swp
+*.swo

@@ -1,0 +1,21 @@
+// Pseudo codice di un algoritmo che calcoli il massimo di un array con approccio divide et impera
+// Calcola la complessità tempo
+
+alg findMax (array, left, right){
+    if left == right
+        return array[left]
+    mid = left + right /2
+    
+    //RICORSIVITÀ                               
+    maxleft = findMax (array, left, mid)        T(n/2)
+    maxright = findMax (array, mid +1, right)   T(n/2)
+
+    return max(maxleft, maxright)               
+}
+
+T(n) = \Theta(1) + 2T(n/2)
+
+a= 2, b=2, f(n) = 1
+n^log_2(2) = n
+
+f(n) < n^log_2(2) = n -> T(n) = \Theta(n^log_2(2)) = \Theta(n)
