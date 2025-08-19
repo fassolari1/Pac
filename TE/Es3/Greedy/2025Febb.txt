@@ -1,0 +1,6 @@
+Disponiamo di n libri di identico spessore, ma diverse altezze; il libro i-esimo ha altezza y[i]. Vogliamo
+disporre i libri su scaffali; ogni scaffale può contenere fino ad L libri. Gli scaffali vengono posizionati
+uno sopra l’altro in modo da non sprecare spazio in verticale. L’altezza di ciascuno scaffale è pari
+all’altezza massima dei libri che contiene. L’altezza complessiva occupata dall’intera collezione di libri
+è data dalla somma delle altezze dei singoli scaffali. Scrivere un algoritmo che, dati in input n, il vettore
+y[1 . . . n] e il valore L, restituisce la minima altezza totale occupata dalla collezione di libri.

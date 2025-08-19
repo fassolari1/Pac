@@ -1,0 +1,20 @@
+//Definire l’algoritmo di ricerca binaria in forma iterativa e calcolare (riportando i calcoli intermedi)
+la complessità tempo dell’algoritmo.
+
+function binary_search(A, n, x):
+    low ← 0
+    high ← n - 1
+
+    while low ≤ high do
+        mid ← ⌊(low + high) / 2⌋
+        if A[mid] = x then
+            return mid
+        else if A[mid] < x then
+            low ← mid + 1
+        else
+            high ← mid - 1
+    return -1
+
+    // Complessità: Il numero massimo di iterazioni è ⌊log₂(n)⌋ + 1.
+    // Caso migliore: O(1) (se l’elemento si trova subito al centro).
+	// Caso peggiore / medio: O(\log n), poiché occorrono circa \log_2 n iterazioni.

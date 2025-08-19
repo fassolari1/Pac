@@ -1,0 +1,67 @@
+Siete a bordo di una auto elettrica in un’autostrada. Entrate in autostrada al km 0 con la batteria
+carica e dovete uscire al km N. Prima che la vostra batteria si esaurisca (dopo r km), dovete
+fermarvi in un’area di servizio e sostituirla con una batteria di ricambio. Siano D[1 . . . n] e C[1 . . . n]
+due vettori di interi, dove D[i] e la distanza dell’area di servizio i-esima dall’inizio dell’autostrada, e
+C[i] e il costo di una nuova batteria nell’area i. Il costo totale del viaggio è dato dalla somma dei
+costi delle batterie sostituite per arrivare al km N. Scrivere un algoritmo che prende in input N, r, n,
+D e C e restituisce il costo totale minimo e discutere la complessità.
+[Suggerimento: Notate che la proprietà di sottostruttura ottima è facile da dimostrare, facendo
+notare che se viene effettuata una ricarica alla stazione i-esima, ci si riduce al problema DP[i + 1 .
+. . n] con una lunghezza della strada pari a N − D[i]. Se si assume che esistano due stazione fittizie
+0 e n + 1, con D[0] = 0 e D[n + 1] = N e C[0] = C[n + 1] = 0, non è necessario passare N.]
+
+
+array dp[i]= C[i] + min(dp[j]) con 0 < j < i  e  D[i] - D[j] < r
+
+function min_cost(N, r, n, D[1..n], C[1..n]):
+    // 1) Aggiungi sentinelle
+    D0 ← [0] + D + [N]
+    C0 ← [0] + C + [0]
+    m ← n + 2  // numero totale di stazioni, incluse 0 e n+1
+
+    // 2) DP
+    dp[0] ← 0
+    for i in 1..m-1:
+        dp[i] ← +∞
+        for j in 0..i-1:
+            if D0[i] - D0[j] ≤ r:
+                dp[i] ← min(dp[i], dp[j] + C0[i])
+
+    if dp[m-1] = +∞: return "impossibile"
+    else: return dp[m-1]
+
+
+
+    function min_cost_fast(N, r, n, D[1..n], C[1..n]):
+    sort by D increasing (riordinando C di conseguenza)
+    D0 ← [0] + D + [N]
+    C0 ← [0] + C + [0]
+    m ← n + 2
+
+    dp[0] ← 0
+    for i in 1..m-1: dp[i] ← +∞
+
+    deque ← empty  // conterrà indici j candidati, dp[j] non decrescente
+    push_back(deque, 0)  // j=0 è sempre candidato iniziale
+
+    for i in 1..m-1:
+        // 1) Rimuovi j fuori finestra (troppo lontani per r)
+        while deque non vuota and D0[i] - D0[front(deque)] > r:
+            pop_front(deque)
+
+        // 2) Se finestra vuota → i irraggiungibile
+        if deque è vuota:
+            dp[i] ← +∞
+        else:
+            best ← front(deque)   // ha dp minimo nella finestra
+            dp[i] ← dp[best] + C0[i]
+
+        // 3) Inserisci i come candidato per le posizioni successive:
+        //    mantieni dp non decrescente nella deque
+        while deque non vuota and dp[i] ≤ dp[back(deque)]:
+            pop_back(deque)
+        if dp[i] < +∞:
+            push_back(deque, i)
+
+    if dp[m-1] = +∞: return "impossibile"
+    else: return dp[m-1]

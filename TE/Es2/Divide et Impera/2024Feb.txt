@@ -1,0 +1,13 @@
+// Pseudocode di Selection-Sort in modo ricorsivo
+
+SelectionSort (Array, n){ //n:numero di elementi
+
+    for k=0 to n-2 do
+        int min = k  //indice del primo elemento
+
+        for j=k+1 to n-1
+            if Array[j] < Array[min]
+                min = j
+        
+        scambia Array[m] con Array[k]
+}

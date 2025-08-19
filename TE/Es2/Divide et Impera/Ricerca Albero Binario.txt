@@ -1,0 +1,11 @@
+RicercaBinaria (Node n, int k){
+
+    if (n == null) return void;
+    
+    if (n.key == k)
+        return n;
+
+    if (n.key < k)
+        RicercaBinaria(n.right, k)
+    else RicercaBinaria(n.left, k)
+}

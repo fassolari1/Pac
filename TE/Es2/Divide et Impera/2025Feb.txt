@@ -1,0 +1,22 @@
+// Albero Binario T con chiavi numeriche e altezza h
+// Definire Istogramma l'array I[0,h], in cui alla posizione h ci sono le somme delle chiavi all'altezza j
+// Calcolare la complessità
+
+int[] array = new int[h + 1];
+Node root;
+
+void histogramma(Node node, int level, int[] array){
+    if (node == null)   // se sono alla fine di un ramo "il figlio mai creato" //1
+        return;
+
+    array[level] += node.key; //1
+
+    histogramma(node.left, level+1, array) // Theta(j) j:nodi di sisistra
+    histogramma(node.right, level+1, array) // Theta(k) k: nodi di destra
+}
+
+//la prima chimata sarà:
+histogramma(root, 0, array)
+
+//complessità:
+Theta(j+k) -> Theta(n) n: tutti i nodi dell'albero, che vengono visti solo una volta

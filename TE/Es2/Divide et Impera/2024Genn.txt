@@ -1,0 +1,17 @@
+//Algoritmo che riceve in input un ALBERO BINARIO E UN LIVELLO K, e stampa tutti i nodi di livello K
+
+// calcola complessità
+
+PrintLevel (Node n, level l, index i){ level l: level da stampare, index i: level del nodo n
+    if (n != null && i == l)
+        print(x.key)
+    
+    if (n != null && i < l){
+        PrintLevel(n.sx, l, i+1)
+        PrintLevel(n.dx, l, i+1)
+    }
+}
+
+//Prima chimata: PrintLevel(n, l, 0)
+
+//complessità al più il livello di k. O(numero di rami * k) -> Theta(k)
