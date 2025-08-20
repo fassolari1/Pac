@@ -1,0 +1,10 @@
+1) Grafo Orientato, G = (V, E), ogni arco E ha un età
+s vertice da cui ogni altro vertice è raggiungibile
+Algortimo che partendo da s calcoli il cammino con l'età massima possibile per ogni v appartenente a V.
+
+2) Determinare costo computazionale
+
+-------------------------------------------------
+
+Algortimo di dijkstra al contrario (massimizzando il peso dell'arco scelto)
+

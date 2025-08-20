@@ -1,0 +1,60 @@
+Dato un grafo G = (V,E) non orientato con n vertici ed m archi, progettare un algoritmo che
+restituisce, se esiste, un vertice a caso i ∊ V da cui sono raggiungibili (con cammini) ≥ n/2 altri
+vertici. Se un tale vertice non esiste l'algoritmo restituisce null. Analizzarne anche la complessità
+dell’algoritmo proposto.
+
+------------------------------------------------------------
+
+SOLUZIONE TE
+
+Algoritmo LargeComponent (G)
+    Input: grafo G = (V,E) non orientato
+    Output: vertice v da cui sono raggiungibili >= n/2 vertici, o null se tale vertice non esiste
+
+    for v =1 to n do:
+        K = BFS(G, v);
+        if K>=n/2+1 then return v;
+
+    return null;
+
+NOTE: non implemento BFS 
+BFS non altera la complessità tempo
+la complessità è data dalla visita di tutto il grafo: Theta(n+m) n: numero di vertici e m: numero di archi
+
+------------------------------------------------------------
+
+CHAT GPT:
+function findVertexWithHalfReachability(G = (V,E)):
+    n = |V|
+    threshold = ⌈n/2⌉
+    
+    // Per ogni vertice, calcola quanti vertici sono raggiungibili
+    for each vertex v ∈ V:                    // O(n)
+        reachableCount = BFS_count(G, v)      // O(n + m)
+        
+        if reachableCount >= threshold:
+            return v
+            
+    return null
+
+function BFS_count(G, startVertex):
+    visited = new boolean[n]
+    queue = new Queue()
+    count = 0
+    
+    queue.enqueue(startVertex)
+    visited[startVertex] = true
+    
+    while not queue.isEmpty():                // O(n + m)
+        current = queue.dequeue()
+        
+        for each neighbor w of current:       // O(degree(current))
+            if not visited[w]:
+                visited[w] = true
+                queue.enqueue(w)
+                count++
+                
+    return count
+
+// Complessità O(n+m) con n vertici e m archi
+

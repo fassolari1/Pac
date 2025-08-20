@@ -1,0 +1,23 @@
+Tubo metallico lungo L --> al più n segmenti corti S[1 .. n]
+
+Algoritmo Greedy: num. max di elementi per determinare il num. massimo di segmenti che è possibile ottenere.
+
+ALGORITMO MaxSegments(S[1..n], L):
+    // Input: array S di n lunghezze, lunghezza totale L
+    // Output: massimo numero di segmenti ricavabili
+
+    ordina S in ordine crescente           // O(n log n)
+
+    somma ← 0
+    count ← 0
+
+    per i da 1 a n:                         // O(n)
+        se somma + S[i] ≤ L:
+            somma ← somma + S[i]
+            count ← count + 1
+        altrimenti:
+            interrompi il ciclo
+
+    ritorna count
+
+// Complessità totale: O(n lg n + n) = O(n log n)

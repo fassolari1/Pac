@@ -4,3 +4,21 @@ uno sopra l’altro in modo da non sprecare spazio in verticale. L’altezza di 
 all’altezza massima dei libri che contiene. L’altezza complessiva occupata dall’intera collezione di libri
 è data dalla somma delle altezze dei singoli scaffali. Scrivere un algoritmo che, dati in input n, il vettore
 y[1 . . . n] e il valore L, restituisce la minima altezza totale occupata dalla collezione di libri.
+
+-----------------------------------------------------------------------------------------------------------
+
+function minHeight(y[1..n], int L):
+    sort(y, descending)   // ordina le dimensioni in ordine decrescente     O(n log n)
+    totalHeight ← 0
+    count <- 0
+
+    for i = 1 to n:                O(n)
+        if count = 0 :
+            totalHeight += y[i]
+
+        count += 1
+
+        if count == L :
+            count = 0
+        
+    return totalHeight

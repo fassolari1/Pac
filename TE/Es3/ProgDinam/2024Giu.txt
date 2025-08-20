@@ -1,0 +1,29 @@
+Si consideri la seguente nuova politica dei prezzi per Trenitalia: è possibile acquistare un (i)
+abbonamento per X euro con validità un mese a partire dal giorno di emissione, valido su tutte le
+tratte; oppure (ii) pagare un biglietto a tariffa intera per un particolare viaggio. Siete un
+rappresentante di commercio e avete programmato una serie di viaggi per il prossimo anno, nei
+giorni d1, .., dn. La tariffa intera per ognuno di questi viaggi è f1, .., fn. Scrivere un algoritmo con
+strategia di Programmazione Dinamica che minimizzi il costo totale, stampando i giorni in cui
+conviene comprare gli abbonamenti piuttosto che il biglietto. Valutare poi la complessità e
+discutere la correttezza del vostro algoritmo.
+[Assunzioni: Assumere che i giorni siano rappresentati da un intero fra 1 e 365 e che un
+abbonamento duri 30 giorni (dal giorno di inizio a giorno di inizio+29 inclusi). Assumere inoltre che
+i viaggi siano ordinati per giorno].
+
+----------------------------------------------------
+
+PSEUDO:
+Algoritmo (int X, int f[], int giorno, int abbonamento[])
+    int sum = 0;
+
+    for j=0 to 30
+        sum += f[giorno +j]
+
+    if sum < X:
+        abbonamento[giorno] = true;
+        giorno += 30;
+
+    if giorno >= 365
+        return;
+    
+    Algoritmo(X, f[], giorno, abbonamento[])
