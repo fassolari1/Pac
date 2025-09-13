@@ -13,7 +13,7 @@ Determinare inoltre il costo computazionale dell'algoritmo descritto.*/
 
 Algoritmo CamminoMonotono (grafo G=(V,E), nodo s, nodo d) --> boolean
     
-    // setto a falsei mark di tutti i nodi
+    // setto a false i mark di tutti i nodi
     foreach v in V do :
         v.mark := false
     
@@ -28,7 +28,7 @@ Algoritmo CamminoMonotono_RICORSIVO (grafo G=(V,E), nodo s, nodo d) --> boolean
         print d;
         return true;
     else
-        foreach nodo x adiacente_a_s do:
+        foreach nodo x adiacente_a_s do:   'G.Adj(s)'
             // se in x non ci sono ancora passato e il suo peso è crescente allora
             if (x.mark == false && s.mark < x.mark) then
                 // Chiamata ricosiva per vedere se arrivo ad un dunque
@@ -40,4 +40,4 @@ Algoritmo CamminoMonotono_RICORSIVO (grafo G=(V,E), nodo s, nodo d) --> boolean
         return false;
 
 
-// Complessità O(n+m) vertici e archi
+// Complessità O(n+m) vertici e archi perché visita in 

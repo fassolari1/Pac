@@ -1,0 +1,86 @@
+PROBLEMA: Assegnare n lezioni a delle aule
+INPUT: 
+- S[i] = orario di inizio della lezione i
+- F[i] = orario di fine della lezione i
+OUTPUT: Algoritmo greedy che minimizzi il numero di aule usate
+
+===============================================================
+ALGORITMO GREEDY PER ASSEGNAZIONE AULE - PSEUDOCODICE
+===============================================================
+
+ALGORITMO AssegnazioneAuleGreedy(S[], F[], n):
+    // INPUT: S[1..n] orari di inizio, F[1..n] orari di fine, n numero lezioni
+    // OUTPUT: numero minimo di aule necessarie
+    
+    1. Creare array Lezioni[1..n] dove Lezioni[i] = (i, S[i], F[i])
+    
+    2. Ordinare Lezioni[] per orario di inizio crescente
+       // Ordinamento per S[i] in modo che S[1] ≤ S[2] ≤ ... ≤ S[n]
+    
+    3. Inizializzare:
+       - AuleOccupate = coda_priorità_vuota (ordinata per orario di fine)
+       - NumeroAule = 0
+    
+    4. PER ogni lezione i da 1 a n FARE:
+       
+       a) // Liberare le aule che terminano prima dell'inizio della lezione corrente
+          MENTRE AuleOccupate non è vuota E 
+                 primo_elemento(AuleOccupate).orario_fine ≤ S[i] FARE:
+             rimuovi_primo(AuleOccupate)
+          FINE MENTRE
+       
+       b) SE AuleOccupate è vuota ALLORA:
+             // Necessaria una nuova aula
+             NumeroAule = NumeroAule + 1
+             inserisci(AuleOccupate, (NumeroAule, F[i]))
+          ALTRIMENTI:
+             // Riutilizza l'aula che si libera prima
+             aula = rimuovi_primo(AuleOccupate)
+             aula.orario_fine = F[i]
+             inserisci(AuleOccupate, aula)
+          FINE SE
+    
+    5. RESTITUISCI NumeroAule
+
+===============================================================
+SPIEGAZIONE DELLA STRATEGIA GREEDY:
+===============================================================
+
+IDEA PRINCIPALE:
+- Ordinare le lezioni per orario di inizio
+- Mantenere una coda di priorità delle aule occupate (ordinate per orario di fine)
+- Per ogni lezione, riutilizzare l'aula che si libera prima se possibile
+
+SCELTA GREEDY:
+A ogni passo, scegliere l'aula che si libera prima tra quelle disponibili.
+Se nessuna aula è disponibile, creare una nuova aula.
+
+OTTIMALITÀ:
+L'algoritmo è ottimo perché:
+1. Non può usare meno aule del massimo numero di lezioni sovrapposte
+2. La strategia greedy garantisce di non creare aule inutili
+3. Complessità temporale: O(n log n) per ordinamento + O(n log n) per coda priorità
+
+===============================================================
+ESEMPIO DI ESECUZIONE:
+===============================================================
+
+Input: 
+Lezione 1: S[1]=9, F[1]=10
+Lezione 2: S[2]=9, F[2]=11  
+Lezione 3: S[3]=10, F[3]=12
+Lezione 4: S[4]=11, F[4]=13
+Lezione 5: S[5]=14, F[5]=15
+
+Dopo ordinamento (già ordinato per S[i]):
+Lezioni: [(1,9,10), (2,9,11), (3,10,12), (4,11,13), (5,14,15)]
+
+Esecuzione:
+1. Lezione 1 (9-10): AuleOccupate=[], crea Aula1, AuleOccupate=[(1,10)]
+2. Lezione 2 (9-11): AuleOccupate=[(1,10)], 10>9, crea Aula2, AuleOccupate=[(1,10),(2,11)]
+3. Lezione 3 (10-12): AuleOccupate=[(1,10),(2,11)], 10≤10, libera Aula1, riusa Aula1, AuleOccupate=[(2,11),(1,12)]
+4. Lezione 4 (11-13): AuleOccupate=[(2,11),(1,12)], 11≤11, libera Aula2, riusa Aula2, AuleOccupate=[(1,12),(2,13)]
+5. Lezione 5 (14-15): AuleOccupate=[(1,12),(2,13)], 12≤14 e 13≤14, libera entrambe, riusa Aula1, AuleOccupate=[(1,15)]
+
+Risultato: 2 aule necessarie
+

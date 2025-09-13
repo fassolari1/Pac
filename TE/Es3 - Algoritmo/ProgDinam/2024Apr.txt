@@ -1,4 +1,4 @@
-Siete a bordo di una auto elettrica in un’autostrada. Entrate in autostrada al km 0 con la batteria
+/*Siete a bordo di una auto elettrica in un’autostrada. Entrate in autostrada al km 0 con la batteria
 carica e dovete uscire al km N. Prima che la vostra batteria si esaurisca (dopo r km), dovete
 fermarvi in un’area di servizio e sostituirla con una batteria di ricambio. Siano D[1 . . . n] e C[1 . . . n]
 due vettori di interi, dove D[i] e la distanza dell’area di servizio i-esima dall’inizio dell’autostrada, e
@@ -9,10 +9,10 @@ D e C e restituisce il costo totale minimo e discutere la complessità.
 notare che se viene effettuata una ricarica alla stazione i-esima, ci si riduce al problema DP[i + 1 .
 . . n] con una lunghezza della strada pari a N − D[i]. Se si assume che esistano due stazione fittizie
 0 e n + 1, con D[0] = 0 e D[n + 1] = N e C[0] = C[n + 1] = 0, non è necessario passare N.]
-
-
+*/
+'''
 array dp[i]= C[i] + min(dp[j]) con 0 < j < i  e  D[i] - D[j] < r
-
+'''
 function min_cost(N, r, n, D[1..n], C[1..n]):
     // 1) Aggiungi sentinelle
     D0 ← [0] + D + [N]

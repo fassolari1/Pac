@@ -1,0 +1,15 @@
+//dato un albero binario T calcola quanti nodi folgia unici (senza fratelli ci sono)
+
+int cout;
+
+FOGLIE_UNICHE(T):
+    se T == null:
+        return 0
+
+    count ← 0
+    se T.left ≠ null e T.right == null e T.left.figli == 0: //T.left è foglia unica
+        count ← count + 1
+    se T.right ≠ null e T.left == null e T.right.figli == 0: //T.right è foglia unica
+        count ← count + 1
+
+    return count + FOGLIE_UNICHE(T.left) + FOGLIE_UNICHE(T.right)

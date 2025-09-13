@@ -40,14 +40,14 @@ public class Amici_di_Amici {
             // Conta il totale di amici e amici di amici
             int totalFriends = friends.size() + friendsOfFriends.size();
 
-            // Aggiorna se troviamo una persona con più amici
+            // Aggiorna se troviamo una persona con piï¿½ amici
             if (totalFriends > maxFriends) {
                 maxFriends = totalFriends;
                 maxPerson = person;
             }
         }
 
-        System.out.println("La persona con il maggior numero di amici e amici di amici è: " + maxPerson);
+        System.out.println("La persona con il maggior numero di amici e amici di amici ï¿½: " + maxPerson);
         System.out.println("Numero di amici e amici di amici: " + maxFriends);
         return maxPerson;
     }
@@ -62,7 +62,7 @@ public class Amici_di_Amici {
         }
 
         // Aggiungi gli archi (amicizie)
-        // Judy è l'unica persona che ha 9 amici (connessa a tutti gli altri)
+        // Judy e' l'unica persona che ha 9 amici (connessa a tutti gli altri)
         for (String person : people) {
             if (!person.equals("Judy")) {
                 graph.addEdge("Judy", person);
@@ -79,7 +79,7 @@ public class Amici_di_Amici {
         graph.addEdge("Frank", "Heidi");
         graph.addEdge("Grace", "Ivan");
 
-        // Trova la persona con più amici e amici di amici
+        // Trova la persona con piu' amici e amici di amici
         findPersonWithMostFriends(graph);
     }
 }

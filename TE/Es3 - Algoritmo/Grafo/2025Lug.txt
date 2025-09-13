@@ -8,3 +8,150 @@ Algortimo che partendo da s calcoli il cammino con l'età massima possibile per 
 
 Algortimo di dijkstra al contrario (massimizzando il peso dell'arco scelto)
 
+PROBLEMA: CAMMINI DI ETÀ MASSIMA DA SORGENTE
+========================================
+
+DESCRIZIONE:
+- Grafo orientato G = (V, E)
+- Ogni arco e ∈ E ha un "età" (peso positivo)
+- Vertice sorgente s da cui tutti i vertici sono raggiungibili
+- OBIETTIVO: Trovare il cammino di età massima da s a ogni vertice v ∈ V
+
+ALGORITMO: DIJKSTRA MODIFICATO (MASSIMIZZAZIONE)
+===============================================
+
+STRUTTURE DATI:
+- dist[v] = età massima del cammino da s a v
+- visited[v] = booleano, true se v è stato processato
+- Q = coda di priorità (max-heap) contenente vertici non visitati
+
+ALGORITMO DijkstraMax(G, s):
+    // INPUT: Grafo G = (V, E), vertice sorgente s
+    // OUTPUT: Array dist[] con le età massime da s a ogni vertice
+    
+    1. INIZIALIZZAZIONE:
+       PER ogni vertice v ∈ V FARE:
+           dist[v] = -∞  // Inizialmente nessun cammino trovato
+           visited[v] = false
+           parent[v] = NULL  // Per ricostruire i cammini
+       FINE PER
+       
+       dist[s] = 0  // Distanza dalla sorgente a se stessa
+       Q = max_heap_vuoto()
+       Inserisci(Q, s, 0)
+    
+    2. RILASSAMENTO DEGLI ARCHI:
+       MENTRE Q non è vuoto FARE:
+           u = EstaiVerticeConEtàMassima(Q)  // Estrai il max dal heap
+           visited[u] = true
+           
+           PER ogni arco (u, v) ∈ E FARE:
+               SE visited[v] = false ALLORA:
+                   nuova_età = dist[u] + età(u, v)
+                   
+                   // RILASSAMENTO (MASSIMIZZAZIONE):
+                   SE nuova_età > dist[v] ALLORA:
+                       dist[v] = nuova_età
+                       parent[v] = u
+                       
+                       SE v non è in Q ALLORA:
+                           Inserisci(Q, v, dist[v])
+                       ALTRIMENTI:
+                           AggiornaChiave(Q, v, dist[v])  // Aumenta priorità
+                       FINE SE
+                   FINE SE
+               FINE SE
+           FINE PER
+       FINE MENTRE
+    
+    3. RESTITUISCI dist[]
+
+===============================================
+FUNZIONI AUSILIARIE:
+===============================================
+
+FUNZIONE EstaiVerticeConEtàMassima(Q):
+    // Estrae il vertice con età massima dalla coda di priorità
+    RESTITUISCI vertice con dist[v] massimo in Q
+
+FUNZIONE RicostruisciCammino(parent[], s, target):
+    // Ricostruisce il cammino di età massima da s a target
+    cammino = lista_vuota()
+    corrente = target
+    
+    MENTRE corrente ≠ NULL FARE:
+        Aggiungi corrente all'inizio di cammino
+        corrente = parent[corrente]
+    FINE MENTRE
+    
+    RESTITUISCI cammino
+
+===============================================
+ESEMPIO DI ESECUZIONE:
+===============================================
+
+GRAFO ESEMPIO:
+Vertici: {s, a, b, c}
+Archi: (s,a,età=5), (s,b,età=2), (a,b,età=1), (a,c,età=8), (b,c,età=3)
+
+ESECUZIONE PASSO-PASSO:
+
+Inizializzazione:
+dist[s] = 0, dist[a] = -∞, dist[b] = -∞, dist[c] = -∞
+Q = {s:0}
+
+Iterazione 1 - Processamento di s:
+- Estrai s (età=0)
+- Rilassa (s,a): dist[a] = max(-∞, 0+5) = 5
+- Rilassa (s,b): dist[b] = max(-∞, 0+2) = 2
+- Q = {a:5, b:2}
+
+Iterazione 2 - Processamento di a (età massima=5):
+- Estrai a (età=5)
+- Rilassa (a,b): dist[b] = max(2, 5+1) = 6
+- Rilassa (a,c): dist[c] = max(-∞, 5+8) = 13
+- Q = {b:6, c:13}
+
+Iterazione 3 - Processamento di c (età massima=13):
+- Estrai c (età=13)
+- Nessun arco uscente da c
+- Q = {b:6}
+
+Iterazione 4 - Processamento di b (età massima=6):
+- Estrai b (età=6)
+- Rilassa (b,c): dist[c] = max(13, 6+3) = 13 (non cambia)
+- Q = {}
+
+RISULTATO FINALE:
+dist[s] = 0  (cammino: s)
+dist[a] = 5  (cammino: s → a)
+dist[b] = 6  (cammino: s → a → b)
+dist[c] = 13 (cammino: s → a → c)
+
+===============================================
+ANALISI COMPLESSITÀ COMPUTAZIONALE:
+===============================================
+
+COMPLESSITÀ TEMPORALE:
+Con heap binario:
+- Inizializzazione: O(|V|)
+- Ogni vertice estratto una volta: |V| estrazioni × O(log |V|) = O(|V| log |V|)
+- Ogni arco rilassato una volta: |E| rilassamenti × O(log |V|) = O(|E| log |V|)
+TOTALE: O((|V| + |E|) log |V|)
+
+===============================================
+CORRETTEZZA DELL'ALGORITMO:
+===============================================
+
+INVARIANTE: Quando un vertice u viene estratto da Q, dist[u] rappresenta 
+l'età massima del cammino da s a u.
+
+DIMOSTRAZIONE:
+1. All'inizio, dist[s] = 0 è corretto
+2. Quando estraiamo u con età massima, assumiamo esista un cammino migliore
+3. Tale cammino dovrebbe passare per un vertice v non ancora processato
+4. Ma allora dist[v] ≥ età_cammino_migliore > dist[u], contraddicendo 
+   la scelta di u come vertice con età massima
+
+CONDIZIONE NECESSARIA: Non devono esistere cicli di età positiva 
+raggiungibili da s (altrimenti l'età massima sarebbe infinita).

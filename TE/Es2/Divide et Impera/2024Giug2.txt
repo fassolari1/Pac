@@ -1,0 +1,20 @@
+
+Nodo[] nodi_foglie;
+
+calcoloPeso(nodo n, int peso){
+
+    n.key = peso + funzionePeso(n);
+
+    if nodo.figli == 0{
+        if(nodi_foglie is empty OR nodi_foglie[0].key == n.key)
+            nodi_foglie.add(n);
+        else nodi_foglie[0].keys > n.key{
+            nodi_foglie[0] == n;
+        }
+        return;
+    }
+    calcoloPeso(n.left, n.key);
+    calcoloPeso(n.right, n.key);
+}
+
+funzionePeso(nodo n){...}

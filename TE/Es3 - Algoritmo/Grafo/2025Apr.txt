@@ -1,6 +1,6 @@
-Scrivere un algoritmo che, dato un grafo G non orientato, un nodo di partenza s, un nodo
+'Scrivere un algoritmo che, dato un grafo G non orientato, un nodo di partenza s, un nodo
 di arrivo t, con s diverso da t, ed un array P di nodi "preferiti", dice se esiste un cammino da s
-a t che tocca almeno un nodo dell'insieme P. Qual è la complessità dell’algoritmo ideato?
+a t che tocca almeno un nodo dell insieme P. Qual è la complessità dell’algoritmo ideato?'
 
 PASSI:
 	1.	Esegui una BFS/DFS da s.
@@ -9,7 +9,6 @@ PASSI:
 	3.	Altrimenti controlla se R_s \cap P \neq \emptyset.
 	    Se sì → Sì.
 	    Se no → No.
-
 
 PSEUDO:
 function check_path_with_P(G, s, t, P):

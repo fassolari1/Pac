@@ -1,5 +1,4 @@
-// Pseudocode di Selection-Sort in modo ricorsivo
-
+// Pseudocode di Selection-Sort in modo ricorsivo NON DIVIDE ET IMPRA
 SelectionSort (Array, n){ //n:numero di elementi
 
     for k=0 to n-2 do
@@ -8,6 +7,38 @@ SelectionSort (Array, n){ //n:numero di elementi
         for j=k+1 to n-1
             if Array[j] < Array[min]
                 min = j
-        
-        scambia Array[m] con Array[k]
+                scambia Array[min] con Array[k]
+}
+
+//Pseudo codice DIVIDE-ET-IMPERA
+SelectionSort(int[] Array, int inizio, int fine){
+    int min, temp;
+
+    if(inizio < fine){
+
+        // calcolo il più piccolo val da inizio a fine
+        minPos = minPos(Array, inizio, fine);
+
+        if(Array[minPos] < Array[inizio]){
+            //Scambio
+            temp = Arrray[inizio];
+            Array[inizio] = Array[minPos];
+            Arrray[minPos] = temp; 
+        }
+
+        SelectionSort(Array, ++inizio, fine)
+
+    }
+    return Array;
+}
+
+//funzione che calcola la pos del valore minimo
+minPos(int[] Array, int inizio, int fine){
+    int minPos = inizio;
+    for(int i = inizio+1; i <= fine, i++){
+        if(Array[k] > Array[minPos]){
+            minPos = k;
+        }
+    }
+    return minPos;
 }

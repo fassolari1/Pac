@@ -1,7 +1,7 @@
-//Dato un albero binario T con chiavi numeriche e di altezza h, definiamo prodotto di T un array P[0,h]
+/*Dato un albero binario T con chiavi numeriche e di altezza h, definiamo prodotto di T un array P[0,h]
 in cui la cella P[j] contiene il prodotto delle chiavi dei nodi dell'albero che si trovano ad altezza j.
 Scrivere un algoritmo di tipo divide-et-impera che calcoli il prodotto di un albero binario T. 
-// Calcolare anche la complessità dell’algoritmo proposto.
+Calcolare anche la complessità dell’algoritmo proposto.*/
 
 int[] P = new int[h+1];
 P = {1,1,1,1,1,1,1,1,1,.....}

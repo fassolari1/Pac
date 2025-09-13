@@ -1,0 +1,181 @@
+'Supponete di disporre di una cassaforte in cui volete collocare k scatole s1, s2, . . . , sk contenenti
+degli oggetti preziosi. Ogni scatola ha un’altezza hi e contiene un oggetto di valore vi. Inoltre, a
+causa delle ristrette dimensioni, l’unico modo per collocare le scatole nella cassaforte è quello di
+impilarle una sopra l’altra. Tuttavia, la somma delle altezze delle scatole supera l’altezza h della
+cassaforte e, dunque, alcune scatole non possono essere collocate nella cassaforte.
+Naturalmente, si vorrebbe trovare una soluzione in cui il valore totale delle scatole collocate nella
+cassaforte sia il massimo possibile (o, equivalentemente, quello delle scatole che restano fuori sia
+minimo). Ad esempio, se ci sono 3 scatole, con h1 = 10, v1 = 8, h2 = 5, v2 = 3, h3 = 6, v3 = 6 e l’altezza
+della cassaforte è 14, la soluzione ottima è {s2, s3}. Tuttavia, se vi fosse un’ulteriore scatola con h4
+= 4 e v4 = 6, la soluzione ottima sarebbe {s1, s4}. Scrivete lo pseudo-codice di un algoritmo Greedy
+che scelga le scatole, selezionando di volta in volta quella di valore più grande. Calcolare anche la
+complessità tempo dell’algoritmo proposto.'
+
+PROBLEMA CASSAFORTE CON SCATOLE - ALGORITMO GREEDY
+
+DESCRIZIONE:
+- k scatole s1, s2, ..., sk con altezza hi e valore vi
+- Cassaforte con altezza massima h
+- Obiettivo: massimizzare il valore totale delle scatole selezionate
+- Vincolo: somma delle altezze ≤ h
+
+ESEMPI DAL TESTO:
+Esempio 1: h1=10, v1=8, h2=5, v2=3, h3=6, v3=6, h_cassaforte=14
+Soluzione ottima: {s2, s3} con valore totale = 3+6 = 9
+
+Esempio 2: Aggiungendo h4=4, v4=6
+Soluzione ottima: {s1, s4} con valore totale = 8+6 = 14
+
+===============================================================================
+ALGORITMO GREEDY - PSEUDOCODICE
+===============================================================================
+
+STRUTTURA DATI:
+Scatola = record {
+    id: intero
+    altezza: intero  
+    valore: intero
+}
+
+ALGORITMO GreedyCassaforte(Scatole[], k, h_cassaforte):
+    // INPUT: Scatole[1..k] array di scatole, k numero scatole, h_cassaforte altezza massima
+    // OUTPUT: insieme delle scatole selezionate e valore totale
+    
+    1. ORDINAMENTO PER VALORE DECRESCENTE:
+       Ordina Scatole[1..k] per valore decrescente
+       // Dopo ordinamento: Scatole[1].valore ≥ Scatole[2].valore ≥ ... ≥ Scatole[k].valore
+    
+    2. INIZIALIZZAZIONE:
+       Selezionate = insieme_vuoto
+       altezza_corrente = 0
+       valore_totale = 0
+    
+    3. SELEZIONE GREEDY:
+       PER i = 1 A k FARE:
+           SE altezza_corrente + Scatole[i].altezza ≤ h_cassaforte ALLORA:
+               // La scatola i può essere aggiunta
+               Aggiungi Scatole[i] a Selezionate
+               altezza_corrente = altezza_corrente + Scatole[i].altezza
+               valore_totale = valore_totale + Scatole[i].valore
+               
+               Stampa("Selezionata scatola " + Scatole[i].id + 
+                     " (h=" + Scatole[i].altezza + ", v=" + Scatole[i].valore + ")")
+           ALTRIMENTI:
+               Stampa("Scartata scatola " + Scatole[i].id + 
+                     " (non c'è spazio: serve " + Scatole[i].altezza + 
+                     ", disponibile " + (h_cassaforte - altezza_corrente) + ")")
+           FINE SE
+       FINE PER
+    
+    4. RESTITUISCI (Selezionate, valore_totale)
+
+===============================================================================
+FUNZIONAMENTO DELLA STRATEGIA GREEDY:
+===============================================================================
+
+PRINCIPIO: "Scegli sempre la scatola di valore maggiore che può entrare"
+
+SCELTA GREEDY:
+Ad ogni passo, tra tutte le scatole non ancora considerate, scegli quella con 
+valore massimo che rispetta il vincolo di spazio rimanente.
+
+MOTIVAZIONE:
+- Privilegiare il valore immediato massimo
+- Non considerare il rapporto valore/altezza (come nel problema dello zaino frazionario)
+- Seguire strettamente la richiesta: "selezionando di volta in volta quella di valore più grande"
+
+ATTENZIONE:
+Questo algoritmo greedy NON garantisce la soluzione ottimale globale per il problema 
+dello zaino 0-1, ma segue la strategia richiesta dal testo.
+
+===============================================================================
+ESEMPI DI ESECUZIONE:
+===============================================================================
+
+ESEMPIO 1:
+Input: h1=10, v1=8, h2=5, v2=3, h3=6, v3=6, h_cassaforte=14
+
+Dopo ordinamento per valore decrescente:
+s1: h=10, v=8
+s3: h=6, v=6  
+s2: h=5, v=3
+
+Esecuzione:
+1. Considero s1 (v=8): altezza_corrente=0+10=10 ≤ 14 ✓ → SELEZIONO s1
+2. Considero s3 (v=6): altezza_corrente=10+6=16 > 14 ✗ → SCARTO s3  
+3. Considero s2 (v=3): altezza_corrente=10+5=15 > 14 ✗ → SCARTO s2
+
+Risultato Greedy: {s1} con valore = 8
+Soluzione ottima: {s2, s3} con valore = 9
+→ Il greedy NON trova l'ottimo in questo caso!
+
+ESEMPIO 2 (con 4 scatole):
+Input: h1=10, v1=8, h2=5, v2=3, h3=6, v3=6, h4=4, v4=6, h_cassaforte=14
+
+Dopo ordinamento per valore decrescente:
+s1: h=10, v=8
+s3: h=6, v=6
+s4: h=4, v=6  
+s2: h=5, v=3
+
+Esecuzione:
+1. Considero s1 (v=8): 0+10=10 ≤ 14 ✓ → SELEZIONO s1
+2. Considero s3 (v=6): 10+6=16 > 14 ✗ → SCARTO s3
+3. Considero s4 (v=6): 10+4=14 ≤ 14 ✓ → SELEZIONO s4  
+4. Considero s2 (v=3): 14+5=19 > 14 ✗ → SCARTO s2
+
+Risultato Greedy: {s1, s4} con valore = 14
+Soluzione ottima: {s1, s4} con valore = 14
+→ Il greedy trova l'ottimo in questo caso!
+
+===============================================================================
+ANALISI COMPLESSITÀ:
+===============================================================================
+
+COMPLESSITÀ TEMPORALE:
+1. Ordinamento per valore: O(k log k)
+2. Scansione lineare delle scatole: O(k)
+Totale: O(k log k)
+
+COMPLESSITÀ SPAZIALE: O(k)
+- Spazio per l'array delle scatole
+- Spazio per l'insieme delle scatole selezionate
+
+===============================================================================
+OSSERVAZIONI SULLA CORRETTEZZA:
+===============================================================================
+
+IMPORTANTE: Questo algoritmo greedy NON garantisce sempre la soluzione ottimale 
+per il problema dello zaino 0-1 (Knapsack Problem).
+
+CONTROESEMPIO (Esempio 1):
+- Greedy seleziona {s1} con valore 8
+- Ottimo è {s2, s3} con valore 9
+
+QUANDO FUNZIONA BENE:
+- Quando le scatole di valore alto hanno anche altezza compatibile
+- Quando non ci sono molte combinazioni alternative efficaci
+
+ALTERNATIVE PIÙ EFFICACI:
+- Programmazione Dinamica per soluzione ottima: O(k × h_cassaforte)
+- Greedy per rapporto valore/peso nel caso frazionario
+- Branch and Bound per esplorazione intelligente
+
+Il greedy richiesto è semplice e veloce, ma non ottimale.
+
+===============================================================================
+TESTO ORIGINALE:
+===============================================================================
+
+Supponete di disporre di una cassaforte in cui volete collocare k scatole s1, s2, . . . , sk contenenti
+degli oggetti preziosi. Ogni scatola ha un'altezza hi e contiene un oggetto di valore vi. Inoltre, a
+causa delle ristrette dimensioni, l'unico modo per collocare le scatole nella cassaforte è quello di
+impilarle una sopra l'altra. Tuttavia, la somma delle altezze delle scatole supera l'altezza h della
+cassaforte e, dunque, alcune scatole non possono essere collocate nella cassaforte.
+Naturalmente, si vorrebbe trovare una soluzione in cui il valore totale delle scatole collocate nella
+cassaforte sia il massimo possibile (o, equivalentemente, quello delle scatole che restano fuori sia
+minimo). Ad esempio, se ci sono 3 scatole, con h1 = 10, v1 = 8, h2 = 5, v2 = 3, h3 = 6, v3 = 6 e l'altezza
+della cassaforte è 14, la soluzione ottima è {s2, s3}. Tuttavia, se vi fosse un'ulteriore scatola con h4
+= 4 e v4 = 6, la soluzione ottima sarebbe {s1, s4}. Scrivete lo pseudo-codice di un algoritmo Greedy
+che scelga le scatole, selezionando di volta in volta quella di valore più grande. Calcolare anche la
+complessità tempo dell'algoritmo proposto.

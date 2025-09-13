@@ -21,6 +21,9 @@ NOTE: non implemento BFS
 BFS non altera la complessità tempo
 la complessità è data dalla visita di tutto il grafo: Theta(n+m) n: numero di vertici e m: numero di archi
 
+numero medio di archi per vertice V : e = E/V dove E: numero archi TOT
+
+
 ------------------------------------------------------------
 
 CHAT GPT:
